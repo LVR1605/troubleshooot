@@ -54,7 +54,7 @@ function editUser(userId) {
 	<div class="mx-auto max-w-5xl py-10">
 		<h3 class="text-2xl">Users</h3>
 		<div>
-		  <FormButton type="button" buttonStyle="primary" @click="navigateTo('/users/new')">New User</FormButton>
+		  <FormButton type="button" class="transition-colors duration-200 bg-blue-400 text-black font-semibold text-sm hover:bg-teal-200 p-3 rounded-lg" @click="navigateTo('/users/new')">New User</FormButton>
 		</div>
 		<div>
 		  <div v-if="pending">
@@ -92,8 +92,8 @@ function editUser(userId) {
 			</div>
 		</div>
 		<div class="flex justify-between p-5 m-5 ">
-			<FormButtonPage type="button" buttonStyle="primary" @click="previousPage" :disabled="currentPage === 1">PREVIOUS</FormButtonPage>
-			<FormButtonPage type="button" buttonStyle="primary" @click="nextPage" :disabled="currentPage === totalPages">NEXT</FormButtonPage>
+			<FormButtonPage type="button" class="transition-colors duration-200 bg-blue-400 text-black font-semibold text-sm hover:bg-teal-200 p-3 rounded-lg" @click="previousPage" :disabled="currentPage === 1">PREVIOUS</FormButtonPage>
+			<FormButtonPage type="button" class="transition-colors duration-200 bg-blue-400 text-black font-semibold text-sm hover:bg-teal-200 p-3 rounded-lg" @click="nextPage" :disabled="currentPage === totalPages">NEXT</FormButtonPage>
 			
         </div>
 	</div>
