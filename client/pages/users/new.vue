@@ -9,18 +9,70 @@
                 <div>
                     <FormLabel label="Name" />
                     <FormTextField name="name" placeholder="Name" v-model="state.user.name" />
+                    <div>
+                        {{ state.errors && state.errors.data && state.errors.data.errors && state.errors.data.errors.name && state.errors.data.errors.name[0] }}
+                    </div>
                 </div>
                 <div>
                     <FormLabel label="Course" />
                     <FormTextField name="course" placeholder="Course" v-model="state.user.course" />
+                    <div>
+                        {{ state.errors && state.errors.data && state.errors.data.errors && state.errors.data.errors.course && state.errors.data.errors.course[0] }}
+                    </div>
                 </div>
                 <div>
                     <FormLabel label="Email" />
                     <FormTextField name="email" placeholder="Email" v-model="state.user.email" />
+                    <div>
+                        {{ state.errors && state.errors.data && state.errors.data.errors && state.errors.data.errors.email && state.errors.data.errors.email[0] }}
+                    </div>
                 </div>
                 <div>
                     <FormLabel label="Password" />
-                    <FormTextField type="password" name="password" placeholder="Password" v-model="state.user.password" />
+                    <div class="relative">
+                        <FormTextField
+                            :type="showPassword ? 'text' : 'password'"
+                            name="password"
+                            placeholder="password"
+                            v-model="state.user.password"
+                        />
+                        <button
+                            type="button"
+                            class="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                            @click="showPassword = !showPassword"
+                        >
+                            <svg
+                                v-if="showPassword"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="w-5 h-5"
+                            >
+                                <path d="M22.617 4.617a9 9 0 0 0-12.718 0L12 5.828l-1.899-1.9a9 9 0 0 0-2.618 2.616L12 10.061l4.516-4.516a9 9 0 0 0 2.101 2.616L12 14.172l-1.899-1.9a9 9 0 0 0 2.101-2.616L12 10.06l1.899 1.9a9 9 0 0 0 2.618-2.616L12 5.828l1.899-1.9a9 9 0 0 0 2.718 2.617z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            <svg
+                                v-else
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="w-5 h-5"
+                            >
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 1 21 12.79z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div>
+                        {{ state.errors && state.errors.data && state.errors.data.errors && state.errors.data.errors.password && state.errors.data.errors.password[0] }}
+                    </div>
                 </div>
                 <div>
                     <FormLabel label="Status" />
@@ -37,6 +89,8 @@
 </template>
   
 <script setup>
+const showPassword = ref(false);
+
 const state = reactive({
     user: {
         name: null,
@@ -44,7 +98,8 @@ const state = reactive({
         password: null,
         email: null,
         is_active: false,
-    }
+    },
+    errors: null,
 })
 
 function back() {
@@ -66,8 +121,8 @@ async function saveUser() {
         if (result) {
             alert('Successfully saved.')
         }
-    }).catch((error) => {
-        alert('Something went wrong.')
+    }).catch((errors) => {
+        state.errors = errors
     })
 }
 </script>

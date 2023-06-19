@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
@@ -21,7 +21,7 @@ class UserController extends Controller
         return $user;
     }
 
-    public function saveUser(Request $request)
+    public function saveUser(SaveUserRequest $request)
     {
         $payload = (object) $request->only([
             'name',
@@ -41,7 +41,7 @@ class UserController extends Controller
         return $user;
     }
 
-    public function updateUser($id, Request $request)
+    public function updateUser($id, UpdateUserRequest $request)
     {
         $payload = (object) $request->only([
             'name',
